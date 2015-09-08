@@ -28,6 +28,6 @@ server.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/, function (req, res, next) {
   return next();
 });
 
-server.listen(8080, function () {
+server.listen(process.env.PORT || 8080, function () {
   log.info('%s listening at %s', server.name, server.url);
 });
