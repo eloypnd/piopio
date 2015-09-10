@@ -1,5 +1,7 @@
 # Piopio
 
+[![Dependency Status](https://www.versioneye.com/user/projects/55f2084ad4d204001c0000f1/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55f2084ad4d204001c0000f1)
+
 A simple server-side proxy written in nodejs to connect to Twitter API.
 
 ## Why do I need it?
