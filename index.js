@@ -24,7 +24,14 @@ server.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/, function (req, res, next) {
   twitter.get({
     uri: req.url
   }, function (error, response, body) {
-    res.send(response.statusCode, body);
+    if (error) {
+      log.error(error.name, error.message);
+      res.send(502, {
+        error: { code: error.name, message: error.message }
+      });
+    } else {
+      res.send(response.statusCode, body);
+    }
   });
   return next();
 });
