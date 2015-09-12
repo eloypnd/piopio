@@ -25,7 +25,7 @@ $ npm install
 $ ./pio.sh
 ```
 
-Your proxy should now be running on [localhost:8080](http://localhost:8080)
+Your proxy should now be running on [localhost:5000](http://localhost:5000)
 
 ## Deploying
 
@@ -36,6 +36,8 @@ $ heroku login
 $ heroku create
 $ heroku config:set TWITTER_CONSUMER_KEY=<your_key>
 $ heroku config:set TWITTER_CONSUMER_SECRET=<your_secret>
+# if you want CORS enabled (e.g. http://host1,http://host2)
+$ heroku config:set ORIGIN_WHITELIST=<comma_separated_list_of_hosts>
 $ git push heroku master
 $ heroku open
 ```

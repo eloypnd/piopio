@@ -8,6 +8,7 @@ var twitter = new Twitter({
   key: process.env.TWITTER_CONSUMER_KEY,
   secret: process.env.TWITTER_CONSUMER_SECRET
 });
+var originWhitelist = (process.env.ORIGIN_WHITELIST) ? process.env.ORIGIN_WHITELIST.split(',') : undefined;
 
 var server = restify.createServer({
   name: 'pio-server',
@@ -17,25 +18,29 @@ var server = restify.createServer({
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
-server.use(restify.CORS());
 server.use(restify.gzipResponse());
+server.use(restify.CORS({ origins: originWhitelist }));
+server.on('after', restify.auditLogger({ log: log }));
 
 server.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/, function (req, res, next) {
-  twitter.get({
-    uri: req.url
-  }, function (error, response, body) {
-    if (error) {
-      log.error(error.name, error.message);
-      res.send(502, {
-        error: { code: error.name, message: error.message }
-      });
-    } else {
-      res.send(response.statusCode, body);
-    }
-  });
+  if (originWhitelist && req.headers.origin && originWhitelist.indexOf(req.headers.origin) === -1) {
+    req.log.warn('CORS warning: unkown origin', req.headers.referer);
+    res.send(200, {error: { code: 'CORS_Error', message: 'Unkown origin' }});
+  } else {
+    twitter.get({
+      uri: req.url
+    }, function (error, response, body) {
+      if (error) {
+        log.error(error.name, error.message);
+        res.send(502, {error: { code: error.name, message: error.message }});
+      } else {
+        res.send(response.statusCode, body);
+      }
+    });
+  }
   return next();
 });
 
-server.listen(process.env.PORT || 8080, function () {
+server.listen(process.env.PORT || 5000, function () {
   log.info('%s listening at %s', server.name, server.url);
 });
