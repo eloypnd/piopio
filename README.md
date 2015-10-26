@@ -14,7 +14,7 @@ We will be using [Application-only authentication](https://dev.twitter.com/oauth
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+Make sure you have [Node.js](http://nodejs.org/) and [NPM](https://www.npmjs.com/) installed.
 
 ```sh
 $ git clone git@github.com:eloypnd/piopio.git # or clone your own fork
@@ -30,6 +30,8 @@ Your proxy should now be running on [localhost:5000](http://localhost:5000)
 ## Deploying
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+Make sure you have the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 ```sh
 $ heroku login
