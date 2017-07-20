@@ -1,4 +1,5 @@
 var restify = require('restify');
+var corsMiddleware = require('restify-cors-middleware');
 var bunyan = require('bunyan');
 var Twitter = require('./lib/twitter');
 
@@ -8,19 +9,22 @@ var twitter = new Twitter({
   key: process.env.TWITTER_CONSUMER_KEY,
   secret: process.env.TWITTER_CONSUMER_SECRET
 });
-var originWhitelist = (process.env.ORIGIN_WHITELIST) ? process.env.ORIGIN_WHITELIST.split(',') : undefined;
+const originWhitelist = (process.env.ORIGIN_WHITELIST) ? process.env.ORIGIN_WHITELIST.split(',') : [];
+const cors = corsMiddleware({
+  origins: originWhitelist
+})
 
 var server = restify.createServer({
   name: 'pio-server',
   version: '0.1.0',
   log: log
 });
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
-server.use(restify.gzipResponse());
-server.use(restify.CORS({ origins: originWhitelist }));
-server.on('after', restify.auditLogger({ log: log }));
+server.use(restify.plugins.acceptParser(server.acceptable));
+server.use(restify.plugins.queryParser());
+server.use(restify.plugins.bodyParser());
+server.use(restify.plugins.gzipResponse());
+server.use(cors.actual)
+server.on('after', restify.plugins.auditLogger({ event: 'after', log: log }));
 
 server.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/, function (req, res, next) {
   if (originWhitelist && req.headers.origin && originWhitelist.indexOf(req.headers.origin) === -1) {

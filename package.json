@@ -22,11 +22,12 @@
     "proxy"
   ],
   "dependencies": {
-    "bunyan": "^1.5.1",
+    "bunyan": "^1.8.10",
     "lodash": "^4.5.0",
     "nodemon": "^1.11.0",
     "request": "^2.61.0",
-    "restify": "~4.0.0"
+    "restify": "^5.0.1",
+    "restify-cors-middleware": "^1.0.0"
   },
   "devDependencies": {
     "request-debug": "^0.2.0"
