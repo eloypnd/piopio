@@ -34,6 +34,21 @@ $ npm run dev # start development proxy server
 
 Your proxy should now be running on [localhost:5000](http://localhost:5000)
 
+**Run proxy server from `Procfile`**
+
+We have a `Procfile` that we use for the deployment to heroku. You can use this same `Procfile` to run the proxy server locally.
+
+If you are deploying to heroku and you have the [heroku-cli](https://devcenter.heroku.com/articles/heroku-cli) installed you can use [heroku local](https://devcenter.heroku.com/articles/heroku-cli-commands#local) command.
+
+If you don't want to use heroku, another option is [foreman](https://github.com/ddollar/foreman).
+
+One of the advantages of this way of running our proxy server is that instead of exporting the environment variables we create an `.env` file:
+
+```sh
+TWITTER_CONSUMER_KEY=your_twitter_app_consumer_key
+TWITTER_CONSUMER_SECRET=your_twitter_app_consumer_secret
+```
+
 ## Deploying
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
