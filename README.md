@@ -12,17 +12,23 @@ A simple server-side proxy written in nodejs to connect to Twitter API.
 
 We will be using [Application-only authentication](https://dev.twitter.com/oauth/application-only) to authenticate with Twitter API from our proxy. You need to create an application and get a `key`/`secret` pair [here](https://apps.twitter.com/)
 
-## Running Locally
-
 Make sure you have [Node.js](http://nodejs.org/) and [NPM](https://www.npmjs.com/) installed.
 
+## Install
+
 ```sh
-$ git clone git@github.com:eloypnd/piopio.git # or clone your own fork
+$ git clone git@github.com:eloypnd/piopio.git
 $ cd piopio
-# open pio.sh and add your key/secret pair
-$ npm install -g nodemon
+$ export TWITTER_CONSUMER_KEY=<your_key>
+$ export TWITTER_CONSUMER_SECRET=<your_secret>
 $ npm install
-$ ./pio.sh
+```
+
+## Usage
+
+```sh
+$ npm start # start proxy server
+$ npm run dev # start development proxy server
 ```
 
 Your proxy should now be running on [localhost:5000](http://localhost:5000)
