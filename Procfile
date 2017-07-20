@@ -1,1 +1,1 @@
-web: node index.js | bunyan
+web: npm start
