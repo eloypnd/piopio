@@ -1,6 +1,7 @@
 # Piopio
 
 [![Dependency Status](https://www.versioneye.com/user/projects/57a83ae60f6400079bd590e9/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57a83ae60f6400079bd590e9)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 A simple server-side proxy written in nodejs to connect to Twitter API.
 
